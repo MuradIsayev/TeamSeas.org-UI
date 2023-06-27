@@ -1,7 +1,6 @@
-import '@fontsource/montserrat/700.css'
-import '@fontsource/montserrat/400.css'
-import '@fontsource/montserrat/300.css'
-
+import '@fontsource/montserrat/700.css';
+import '@fontsource/montserrat/400.css';
+import '@fontsource/montserrat/300.css';
 
 import * as React from 'react';
 import {
@@ -16,6 +15,7 @@ import {
   extendTheme
 } from '@chakra-ui/react';
 import { Logo } from './Logo';
+import { Counter } from './donation/Counter';
 
 const theme = extendTheme({
   fonts: {
@@ -37,6 +37,10 @@ export const App = () => (
             The team is growing everyday and scoring wins for the planet.
             <br /> Remove trash with us and track our progress!
           </Text>
+
+          <Heading as="h2" size="4xl">
+            <Counter from={0} to={23423423} />
+          </Heading>
         </VStack>
       </Grid>
     </Box>
