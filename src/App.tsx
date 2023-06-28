@@ -14,7 +14,8 @@ import {
 } from '@chakra-ui/react';
 import { Logo } from './Logo';
 import { Counter } from './donation/Counter';
-import { useQuery } from 'urql';
+import { Leaderboard } from './leaderboard/Leaderboard';
+import { useQuery, useSubscription } from 'urql';
 
 const TotalDonationsQuery = `
   query Query {
@@ -22,7 +23,17 @@ const TotalDonationsQuery = `
   }
 `;
 
+const TotalUpdatedQuery = `
+  subscription Subscription {
+    totalUpdated {
+      total
+    }
+  }
+`;
 
+const handleSubscription = (prev: any, newTotal: any) => {
+  return newTotal?.totalUpdated?.total;
+};
 
 const theme = extendTheme({
   fonts: {
@@ -32,6 +43,13 @@ const theme = extendTheme({
 });
 
 export const App = () => {
+  const [res] = useSubscription(
+    {
+      query: TotalUpdatedQuery
+    },
+    handleSubscription
+  );
+
   const [{ data, fetching, error }] = useQuery({
     query: TotalDonationsQuery
   });
@@ -54,8 +72,12 @@ export const App = () => {
             </Text>
 
             <Heading as="h2" size="4xl">
-              <Counter from={0} to={data.totalDonations} />
+              <Counter from={0} to={res.data || data.totalDonations} />
             </Heading>
+
+            [Donation Wizard]
+
+            <Leaderboard />
           </VStack>
         </Grid>
       </Box>
