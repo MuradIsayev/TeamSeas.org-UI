@@ -7,39 +7,26 @@ interface Props {}
 
 export const DonationWizard = (props: Props) => {
   const [step, setStep] = useState(0);
+  const [donationDetails, setDonationDetails] = useState({ count: 20 });
 
-  const next = () => setStep(step + 1);
+  const next = (values: any = {}) => {
+    const mergedDetails = { ...donationDetails, ...values };
+    setStep(step + 1);
+
+    setDonationDetails(mergedDetails);
+  };
   const previous = () => setStep(step - 1);
 
-  const pages = [<CountSelection/>, <div>Step 2</div>];
+  const pages = [
+    <CountSelection next={next} initialCount={donationDetails.count} />,
+    <div>
+      Step 2<button onClick={previous}>Prev</button>
+    </div>
+  ];
 
   return (
     <Box boxShadow="xl" p={8} bg="white" borderRadius="xl" minW="sm">
       {pages[step]}
-
-      <VStack spacing={2}>
-        <Button
-          w="full"
-          colorScheme="blue"
-          size="lg"
-          borderRadius="full"
-          onClick={next}
-        >
-          Next
-        </Button>
-        <Button
-          w="full"
-          onClick={previous}
-          size="lg"
-          borderRadius="full"
-          variant="ghost"
-          fontSize="sm"
-          color="gray.700
-            "
-        >
-          Previous
-        </Button>
-      </VStack>
     </Box>
   );
 };

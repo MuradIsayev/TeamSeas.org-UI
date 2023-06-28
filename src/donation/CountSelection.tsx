@@ -4,13 +4,17 @@ import RadioCard from './RadioCard';
 import { useRadioGroup } from '@chakra-ui/radio';
 import { SimpleGrid, VStack } from '@chakra-ui/layout';
 import { NumberInput, NumberInputField } from '@chakra-ui/number-input';
+import { Button } from '@chakra-ui/button';
 
-interface Props {}
+interface Props {
+  initialCount: number;
+  next: (values: any) => void;
+}
 
 const options = [5, 20, 50, 100];
 
-export const CountSelection = (props: Props) => {
-  const [pounds, setPounds] = useState(20);
+export const CountSelection = ({ initialCount, next }: Props) => {
+  const [pounds, setPounds] = useState(initialCount);
   const [customAmount, setCustomAmount] = useState(
     '' + (options.includes(pounds) ? '' : pounds)
   );
@@ -26,9 +30,13 @@ export const CountSelection = (props: Props) => {
 
   const group = getRootProps();
 
+  const nextStep = () => {
+    next({ count: pounds });
+  };
+
   return (
     <VStack spacing={4} align="stretch">
-      <SimpleGrid mt={1} mb={2} columns={2} spacing={2} {...group}>
+      <SimpleGrid mt={1} columns={2} spacing={2} {...group}>
         {options.map(value => {
           const radio = getRadioProps({ value, enterKeyHint: '' });
           return (
@@ -38,7 +46,7 @@ export const CountSelection = (props: Props) => {
           );
         })}
       </SimpleGrid>
-      <NumberInput mb={3}
+      <NumberInput
         onFocus={() => setPounds(0)}
         onChange={value => {
           setPounds(parseInt(value));
@@ -48,6 +56,18 @@ export const CountSelection = (props: Props) => {
       >
         <NumberInputField placeholder="Other amount" />
       </NumberInput>
+
+      <hr />
+
+      <Button
+        w="full"
+        colorScheme="blue"
+        size="lg"
+        borderRadius="full"
+        onClick={nextStep}
+      >
+        Next
+      </Button>
     </VStack>
   );
 };
