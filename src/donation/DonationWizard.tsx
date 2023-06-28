@@ -20,6 +20,7 @@ interface Props {}
 export const DonationWizard = (props: Props) => {
   const [step, setStep] = useState(0);
   const [donationDetails, setDonationDetails] = useState({ count: 20 });
+  const [showConfirmation, setShowConfirmation] = useState(false);
   const [donationResult, createDonation] = useMutation(CreateDonation);
 
   const next = (values: any = {}) => {
@@ -39,6 +40,7 @@ export const DonationWizard = (props: Props) => {
     await createDonation({
       createDonationInput: values
     });
+    setShowConfirmation(true);
   };
 
   const pages = [
@@ -48,7 +50,14 @@ export const DonationWizard = (props: Props) => {
 
   return (
     <Box boxShadow="xl" p={8} bg="white" borderRadius="xl" minW="sm">
-      {pages[step]}
+      {showConfirmation ? (
+        <div>
+          Thank you for your donation of $
+          {donationResult?.data.createDonation?.count}!!
+        </div>
+      ) : (
+        pages[step]
+      )}
     </Box>
   );
 };
