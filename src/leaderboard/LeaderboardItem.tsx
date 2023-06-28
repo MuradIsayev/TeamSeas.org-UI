@@ -18,7 +18,7 @@ export const LeaderboardItem = ({ donation }: Props) => {
       maxWidth="xl"
       w="100%"
     >
-      <Avatar size="lg" />
+      <Avatar size="lg" bg='blue.200' />
       <Box flex="1" ml={4}>
         <Flex justifyContent="space-between" h="100%">
           <Flex flexDirection="column" justifyContent="center" textAlign="left">
