@@ -47,9 +47,9 @@ export const Leaderboard = (props: Props) => {
   if (error) return <p>Something went wrong...</p>;
 
   return (
-    <Box w="100%">
+    <Box w="100%" mt={16}>
       <VStack spacing={4}>
-        <Heading as="h1" size="2xl">
+        <Heading as="h1" size="2xl" mb={2}>
           LEADERBOARD
         </Heading>
 

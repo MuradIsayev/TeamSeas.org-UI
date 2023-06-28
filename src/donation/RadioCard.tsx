@@ -1,5 +1,6 @@
 import { useRadio, Box, UseRadioProps } from '@chakra-ui/react';
 import React, { ReactNode } from 'react';
+import { color } from 'style-value-types';
 
 interface Props extends UseRadioProps {
   children: ReactNode;
@@ -28,6 +29,9 @@ const RadioCard = (props: Props) => {
         }}
         _focus={{
           boxShadow: 'outline'
+        }}
+        _hover={{
+          backgroundColor: 'gray.100'
         }}
         px={2}
         py={2}
