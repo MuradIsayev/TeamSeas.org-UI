@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Heading } from '@chakra-ui/react';
+import { Box, Heading, VStack } from '@chakra-ui/react';
 import { LeaderboardItem } from './LeaderboardItem';
 
 type Props = {};
@@ -7,15 +7,29 @@ type Props = {};
 export const Leaderboard = (props: Props) => {
   return (
     <Box w="100%">
-      <Heading>LEADERBOARD</Heading>
-
-      <LeaderboardItem
-        donation={{
-          count: 1,
-          displayName: 'test',
-          createdAt: 'test'
-        }}
-      />
+      <VStack spacing={4}>
+        <LeaderboardItem
+          donation={{
+            count: 1,
+            displayName: 'Murick',
+            createdAt: 'test'
+          }}
+        />
+        <LeaderboardItem
+          donation={{
+            count: 1,
+            displayName: 'Murick',
+            createdAt: 'test'
+          }}
+        />
+        <LeaderboardItem
+          donation={{
+            count: 1,
+            displayName: 'Murick',
+            createdAt: 'test'
+          }}
+        />
+      </VStack>
     </Box>
   );
 };
